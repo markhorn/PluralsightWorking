@@ -10,6 +10,7 @@ namespace AngularForMVC.Controllers
     {
         public ActionResult Index()
         {
+            // adding a comment
             return View();
         }
 
