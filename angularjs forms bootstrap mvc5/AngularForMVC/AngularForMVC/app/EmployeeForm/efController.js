@@ -39,12 +39,12 @@ angularFormsApp.controller('efController',
 
         $scope.submitForm = function () {
 
-            angular.forEach($scope.employeeForm.$error.required, function (field) {
-                field.$setDirty();
-                field.$setTouched();
-            });
+            //angular.forEach($scope.employeeForm.$error.required, function (field) {
+            //    field.$setDirty();
+            //    field.$setTouched();
+            //});
 
-            if ($scope.employeeForm.$invalid)                 
+            if ($scope.employeeForm.$invalid)
                 return;
 
             if ($scope.editableEmployee.id == 0) {
@@ -63,21 +63,31 @@ angularFormsApp.controller('efController',
                     });
             }
             else {
-                //update the employee\
-                DataService.updateEmployee($scope.editableEmployee);
+
+                //update the employee
+                DataService.updateEmployee($scope.editableEmployee).then(
+                    function (results) {
+                        //on success
+                        $scope.employee = angular.copy($scope.editableEmployee);
+                        $window.history.back();
+                    },
+                    function (results) {
+                        //on error
+                        $scope.hasFormError = true;
+                        $scope.formErrors = results.statusText;
+                    });
             }
 
-            
 
-            //$modalInstance.close();
-        }
+
+        };
 
         $scope.cancelForm = function () {
             $scope;
-             $window.history.back();
+            $window.history.back();
 
             //$modalInstance.dismiss();
-        }
+        };
 
         $scope.resetForm = function () {
            

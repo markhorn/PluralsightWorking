@@ -4,7 +4,7 @@ angularFormsApp.factory('DataService',
     function ($http) {
 
         var getEmployees = function () {
-            return $http.get("Employee/GetEmployees");
+            return $http.get("api/EmployeeWebApi/Get");
         };
 
         var getEmployee = function (id) {
@@ -31,7 +31,7 @@ angularFormsApp.factory('DataService',
         };
 
         var updateEmployee = function (employee) {
-            return true;
+            return $http.post("Employee/Update", employee);
         }
 
         return {

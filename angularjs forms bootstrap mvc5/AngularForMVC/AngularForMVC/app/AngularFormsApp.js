@@ -21,7 +21,7 @@ angularFormsApp.config(
                 redirectTo: "/home"
             });
         $locationProvider.html5Mode({
-            enabled: true,
+            enabled: false,
             requireBase: false
         });
 

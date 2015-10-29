@@ -49,6 +49,25 @@ namespace AngularForMVC.Controllers
                 String.Join("  ", errors));
         }
 
+        public ActionResult Update(EmployeeVM employee)
+        {
+            if (ModelState.IsValid)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.OK, "Update success");
+
+            }
+
+            List<string> errors = new List<string>();
+            errors.Add("Update Failed.");
+            if (!ModelState.IsValidField("Notes"))
+                errors.Add("Notes must be at least 5 characters long.");
+
+            var s = String.Join("\n", errors);
+
+            return new HttpStatusCodeResult(HttpStatusCode.InternalServerError,
+                String.Join("  ", errors));
+        }
+
         public ContentResult GetJsonContentResult(object data)
         {
             var camelCaseFormatter = new JsonSerializerSettings();
