@@ -26,6 +26,24 @@ namespace AngularForMVC
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+            bundles.Add(new StyleBundle("~/bundles/mini-spa/style").Include(
+                "~/Content/bootstrap.css",
+                "~/Content/app.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/mini-spa/script").Include(
+                "~/Scripts/angular.js",
+                "~/Scripts/angular-route.js",
+                "~/Scripts/angular-ui/ui-bootstrap-tpls.js",
+                "~/app/AngularFormsApp.js",
+                "~/app/DataService.js",
+                "~/app/EmployeeForm/efController.js",
+                "~/app/EmployeeForm/efDirective.js"));
+
+            // remember to set to false when debugging
+            BundleTable.EnableOptimizations = false;
+
+
         }
     }
 }
