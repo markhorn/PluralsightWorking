@@ -57,7 +57,8 @@ angularFormsApp.controller('efController',
                     },
                     function (results) {
                         //on error
-                        alert(results);
+                        $scope.hasFormError = true;
+                        $scope.formErrors = results.statusText;
                     });
             }
             else {

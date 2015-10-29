@@ -4,6 +4,7 @@ using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
@@ -37,7 +38,21 @@ namespace AngularForMVC.Controllers
 
         public ActionResult Create(EmployeeVM employee)
         {
-            return new HttpStatusCodeResult(201, "New Employee Added");
+            if (ModelState.IsValid)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Created, "New Employee Added");
+
+            }
+
+            List<string> errors = new List<string>();
+            errors.Add("Insert Failed.");
+            if (!ModelState.IsValidField("Notes"))
+                errors.Add("Notes must be at least 5 characters long.");
+
+            var s = String.Join("\n", errors);
+
+            return new HttpStatusCodeResult(HttpStatusCode.InternalServerError,
+                String.Join("  ", errors));
         }
     }
 }

@@ -162,6 +162,7 @@
     <input type="button" class="btn btn-default col-sm-offset-3" value="Cancel" ng-click="cancelForm()" />
     <input type="submit" class="btn btn-primary" value="Submit" ng-click="submitForm()" />
     <input type="reset" class="btn btn-warning" value="Reset" ng-click="resetForm()" />
+    <div class="alert alert-danger" ng-if="hasFormError">{{formErrors}}</div>
     <!--</div>-->
     <!--</div>-->
 </form>
