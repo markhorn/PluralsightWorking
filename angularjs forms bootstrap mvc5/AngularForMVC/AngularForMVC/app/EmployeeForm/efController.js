@@ -53,6 +53,7 @@ angularFormsApp.controller('efController',
                     function (results) {
                         //on success
                         $scope.employee = angular.copy($scope.editableEmployee);
+                        $scope.employee.id = results.data.id;
                         $window.history.back();
                     },
                     function (results) {

@@ -25,22 +25,16 @@ namespace AngularForMVC.Controllers
                 }
             };
 
-            var camelCaseFormatter = new JsonSerializerSettings();
-            camelCaseFormatter.ContractResolver = new CamelCasePropertyNamesContractResolver();
-            var jsonResult = new ContentResult
-            {
-                Content = JsonConvert.SerializeObject(list, camelCaseFormatter),
-                ContentType = "application/json"
-            };
-            // return jsonResult;
-            return new HttpStatusCodeResult(404, "custom error message...");
+            return GetJsonContentResult(list);
+            // return new HttpStatusCodeResult(404, "custom error message...");
         }
 
         public ActionResult Create(EmployeeVM employee)
         {
             if (ModelState.IsValid)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.Created, "New Employee Added");
+                var id = new { id = 12345 }; //would come from database
+                return GetJsonContentResult(id);
 
             }
 
@@ -53,6 +47,18 @@ namespace AngularForMVC.Controllers
 
             return new HttpStatusCodeResult(HttpStatusCode.InternalServerError,
                 String.Join("  ", errors));
+        }
+
+        public ContentResult GetJsonContentResult(object data)
+        {
+            var camelCaseFormatter = new JsonSerializerSettings();
+            camelCaseFormatter.ContractResolver = new CamelCasePropertyNamesContractResolver();
+            var jsonResult = new ContentResult
+            {
+                Content = JsonConvert.SerializeObject(data, camelCaseFormatter),
+                ContentType = "application/json"
+            };
+            return jsonResult;
         }
     }
 }
